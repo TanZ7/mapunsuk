@@ -1,0 +1,58 @@
+@model PostManagementViewModel
+@{
+    ViewData["Title"] = "จัดการโพสต์กิจกรรม";
+}
+
+<div class="management-container">
+    <h2 class="management-title">จัดการโพสต์กิจกรรมของฉัน</h2>
+
+    <div class="management-summary-cards">
+        <div class="summary-card card-other">
+            <div class="card-value">@Model.OtherPostsCount</div>
+            <div class="card-label">โพสต์สมาชิกอื่น</div>
+        </div>
+        <div class="summary-card card-mine">
+            <div class="card-value">@Model.UserPostsCount</div>
+            <div class="card-label">โพสต์ของฉัน</div>
+        </div>
+        <div class="summary-card card-total">
+            <div class="card-value">@Model.TotalPosts</div>
+            <div class="card-label">โพสต์ทั้งหมด</div>
+        </div>
+    </div>
+
+    <div class="table-header">
+        <h3>รายการจิตอาสาที่ฉันสร้าง</h3>
+        <a asp-controller="Post" asp-action="Create" class="add-post-btn">เพิ่มโพสต์</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="post-management-table">
+            <thead>
+                <tr>
+                    <th>วันที่สร้าง</th>
+                    <th>งานอาสา</th>
+                    <th>จำนวนที่รับ</th>
+                    <th>สถานะ</th>
+                    <th>แก้ไขโพสต์</th>
+                    <th>ลบโพสต์</th>
+                    <th>ปิดรับสมัคร</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UserPosts)
+                {
+                    <tr>
+                        <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Title</td>
+                        <td>0 / @item.MaxParticipants คน</td>
+                        <td><span class="status-badge">ดูสมาชิก</span></td>
+                        <td><a href="#" class="action-btn btn-edit">แก้ไข</a></td>
+                        <td><a href="#" class="action-btn btn-delete">ลบ</a></td>
+                        <td><a href="#" class="action-btn btn-close-post">@(item.IsClosed ? "ปิด" : "เปิด")</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

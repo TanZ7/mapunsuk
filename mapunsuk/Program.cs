@@ -11,18 +11,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// ปรับการตั้งค่า Identity ที่นี่
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    // การตั้งค่าการเข้าระบบ
-    options.SignIn.RequireConfirmedAccount = false; // ไม่ต้องยืนยันอีเมล
-
-    // การตั้งค่ารหัสผ่าน
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 6; // กำหนดความยาวขั้นต่ำเป็น 6 ตัวอักษร
+    options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 })
     .AddEntityFrameworkStores<ApplicationDbContext>();

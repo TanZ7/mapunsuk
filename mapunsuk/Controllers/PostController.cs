@@ -3,7 +3,9 @@ using mapunsuk.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace mapunsuk.Controllers
@@ -18,6 +20,28 @@ namespace mapunsuk.Controllers
         {
             _context = context;
             _userManager = userManager;
+        }
+
+        // GET: Post/Manage
+        // เมธอดนี้จะถูกเรียกเมื่อเข้าไปที่ /Post/Manage
+        public async Task<IActionResult> Manage()
+        {
+            var userId = _userManager.GetUserId(User);
+            var userPosts = await _context.Posts
+                                          .Where(p => p.OwnerId == userId)
+                                          .OrderByDescending(p => p.CreatedAt)
+                                          .ToListAsync();
+
+            var totalPosts = await _context.Posts.CountAsync();
+
+            var viewModel = new PostManagementViewModel
+            {
+                UserPosts = userPosts,
+                UserPostsCount = userPosts.Count,
+                TotalPosts = totalPosts
+            };
+
+            return View(viewModel);
         }
 
         // GET: Post/Create
@@ -39,8 +63,7 @@ namespace mapunsuk.Controllers
                 post.OwnerId = _userManager.GetUserId(User);
                 _context.Add(post);
                 await _context.SaveChangesAsync();
-                // เปลี่ยนกลับไปที่หน้าแรกของ Home Controller
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Manage));
             }
             return View(post);
         }
