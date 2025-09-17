@@ -1,0 +1,54 @@
+﻿@model IEnumerable<mapunsuk.Models.Post>
+@{
+    ViewData["Title"] = "หน้าแรก";
+}
+
+<div class="hero-section">
+    <span class="hero-emoji">🤝</span>
+    <h1 class="hero-title">มาปันสุข</h1>
+    <p class="hero-subtitle">ให้กันสังคมไทยให้ สดใจ กัน... หากคุณคือ "อาสา"</p>
+</div>
+
+<div class="activities-section">
+    <h2 class="section-title">กิจกรรมจิตอาสาที่เปิดรับ</h2>
+
+    <div class="search-filter-bar">
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="ค้นหากิจกรรม">
+            <button type="submit" class="search-button">ค้นหา</button>
+        </form>
+        <div class="filter-buttons">
+            <button class="filter-btn">ทำความสะอาด</button>
+            <button class="filter-btn">ทำบุญ</button>
+            <button class="filter-btn">บริจาคของ</button>
+            <button class="filter-btn">มิตรสิ่งแวดล้อม</button>
+            <button class="filter-btn">อื่นๆ</button>
+            <button class="filter-btn active">ทั้งหมด</button>
+        </div>
+    </div>
+
+    <div class="activity-grid">
+        @foreach (var post in Model)
+        {
+            <div class="activity-card">
+                <img src="@(post.CoverImage ?? "https://via.placeholder.com/300x150.png?text=Activity")" alt="Activity Image" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">@post.Title</h3>
+                    <p class="card-text">สถานที่: @post.Location</p>
+                    <p class="card-text">@post.StartDate.ToString("dd MMM yyyy") - @post.EndDate.ToString("dd MMM yyyy")</p>
+                    <p class="card-text">ผู้จัด: @(post.Owner?.FirstName ?? "N/A")</p>
+                    <a href="#" class="join-button">เข้าร่วม</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="pagination">
+        <a href="#" class="page-link prev">&lt;</a>
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">...</a>
+        <a href="#" class="page-link">4</a>
+        <a href="#" class="page-link next">&gt;</a>
+    </div>
+</div>

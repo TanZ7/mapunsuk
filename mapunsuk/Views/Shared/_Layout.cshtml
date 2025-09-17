@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - mapunsuk</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/mapunsuk.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar-custom">
+            <div class="main-container">
+                <a class="navbar-brand-custom" asp-controller="Home" asp-action="Index">MAPUNSUK</a>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+    </header>
+    <div class="main-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="main-container">
+            &copy; 2025 - mapunsuk - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

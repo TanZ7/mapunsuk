@@ -1,0 +1,518 @@
+/* Basic Reset and Body Styles */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin: 0 0 60px 0; /* Added margin: 0 and margin-bottom */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Main Container to replace Bootstrap's .container */
+.main-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .main-container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+    .main-container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+    .main-container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+    .main-container { max-width: 1140px; }
+}
+
+.pb-3 {
+    padding-bottom: 1rem !important;
+}
+
+/* Custom Navbar Styles */
+.navbar-custom {
+    background-color: #5B9BD5;
+    padding: 1rem 0; /* Adjusted padding */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-custom .main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand-custom {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-brand-custom:hover {
+    color: white;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid transparent;
+    display: inline-block;
+    cursor: pointer; /* Added cursor pointer */
+}
+
+.btn-add-activity {
+    background-color: #FFC000;
+    color: black;
+}
+
+.btn-add-activity:hover {
+    background-color: #e6ac00;
+    color: black;
+}
+
+.btn-register-volunteer {
+    background-color: white;
+    color: #5B9BD5;
+}
+
+.btn-register-volunteer:hover {
+    background-color: #f2f2f2;
+    color: #5B9BD5;
+}
+
+.btn-login-custom {
+    background-color: white;
+    color: #5B9BD5;
+    border: 1px solid white;
+}
+
+    .btn-login-custom:hover {
+        background-color: #f2f2f2;
+        color: #5B9BD5;
+    }
+
+.nav-user-greeting {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+/* Footer Styles */
+.site-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e7e7e7;
+}
+
+/* Login Page Styles */
+/* 1. ส่วนคลุมทั้งหมด เพื่อจัดให้อยู่กลางจอ */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* ทำให้ container สูงเกือบเต็มจอ */
+    background-color: #f0f2f5; /* สีพื้นหลังเทาอ่อน */
+    padding: 20px;
+}
+
+/* 2. ตัว Card หลัก */
+.login-card {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px; /* ทำให้ขอบมน */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* เพิ่มเงาให้ดูมีมิติ */
+    width: 100%;
+    max-width: 400px; /* กำหนดความกว้างสูงสุด */
+}
+
+/* 3. หัวข้อ "เข้าสู่ระบบ" */
+.login-title {
+    text-align: center;
+    color: #0d6efd; /* สีน้ำเงิน */
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* 4. ช่องกรอกข้อมูล */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 5. ปุ่ม "เข้าสู่ระบบ" */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffc107; /* สีเหลือง */
+    border: none;
+    border-radius: 5px;
+    color: #212529; /* สีตัวอักษรเข้ม */
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+    .login-button:hover {
+        background-color: #e0a800; /* สีเหลืองเข้มขึ้นเมื่อเอาเมาส์ไปชี้ */
+    }
+
+/* 6. ลิงก์สำหรับไปหน้าสมัครสมาชิก */
+.register-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+    .register-link p {
+        margin: 0;
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .register-link a {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+/* Logout Form */
+.logout-form {
+    margin: 0;
+}
+
+/* Resgister Form Card */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.form-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #FFC000;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.form-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #FFC000;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-submit-btn:hover {
+    background-color: #e6ac00;
+}
+
+.form-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 0.875em;
+}
+
+/* Radio Button Styles */
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Checkbox Styles */
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.form-group.checkbox .form-label {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.form-group.checkbox .form-check-input {
+    margin-right: 8px;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-emoji {
+    font-size: 4rem;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Activities Section */
+.activities-section {
+    padding: 20px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.section-title::before,
+.section-title::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+    max-width: 200px;
+}
+
+/* Search and Filter Bar */
+.search-filter-bar {
+    margin-bottom: 30px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 1rem;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-color: #f0f0f0;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: #5B9BD5;
+    color: white;
+    border-color: #5B9BD5;
+}
+
+/* Activity Grid & Cards */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.activity-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.join-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: auto; /* Pushes button to the bottom */
+    background-color: #92D050;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.join-button:hover {
+    background-color: #7fbf40;
+    color: black;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-link {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.page-link.active, .page-link:hover {
+    background-color: #5B9BD5;
+    color: white;
+    border-color: #5B9BD5;
+}
+
+.page-link.prev, .page-link.next {
+    font-weight: bold;
+}
