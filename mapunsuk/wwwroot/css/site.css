@@ -725,3 +725,93 @@ a:hover {
     overflow: hidden;
     background-color: #e9ecef;
 }
+
+/* Profile Page Styles */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    padding: 40px 20px;
+    background-color: #f8f9fa; /* Light grey background for the page */
+    min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+}
+
+.profile-card {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid #e9ecef; /* Light border */
+}
+
+/* ... existing .profile-header styles ... */
+
+.form-group {
+    margin-bottom: 15px; /* Consistent spacing */
+}
+
+/* Hide labels that are not needed in the new design */
+.form-group > label {
+    display: none;
+}
+
+.name-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.name-group .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Special styling for the Gender group */
+.form-group.gender-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group .gender-label {
+    margin-right: 15px;
+    font-weight: 400; /* Normal font weight */
+    color: #555;
+    display: inline-block !important; /* Ensure this label is visible */
+}
+
+.form-control[disabled] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+/* Update submit button color */
+.form-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #FFC000; /* Yellow color from image */
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-submit-btn:hover {
+    background-color: #e6ac00;
+}
+
+
+.status-message {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    text-align: center;
+}

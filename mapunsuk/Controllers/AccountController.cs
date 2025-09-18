@@ -2,10 +2,11 @@ using mapunsuk.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace mapunsuk.Controllers
 {
-    [Authorize] // Require login for all actions in this controller
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -17,6 +18,7 @@ namespace mapunsuk.Controllers
             _signInManager = signInManager;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
@@ -26,7 +28,7 @@ namespace mapunsuk.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -45,7 +47,7 @@ namespace mapunsuk.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(returnUrl);
                 }
 
                 foreach (var error in result.Errors)
@@ -96,7 +98,6 @@ namespace mapunsuk.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // New Action for Managing Profile
         [HttpGet]
         public async Task<IActionResult> ManageProfile()
         {
@@ -122,39 +123,52 @@ namespace mapunsuk.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageProfile(ManageProfileViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                // If model state is invalid, re-populate the email and return the view
+                var currentUserForEmail = await _userManager.GetUserAsync(User);
+                model.Email = currentUserForEmail?.Email;
+                return View(model);
+            }
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
+            // Update properties
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Gender = model.Gender;
-            user.PhoneNumber = model.PhoneNumber;
+
+            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            if (model.PhoneNumber != phoneNumber)
+            {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
+                if (!setPhoneResult.Succeeded)
+                {
+                    ModelState.AddModelError(string.Empty, "Failed to update phone number.");
+                    model.Email = user.Email; // Re-populate email before returning view
+                    return View(model);
+                }
+            }
 
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-                ViewData["StatusMessage"] = "Your profile has been updated";
-            }
-            else
-            {
-                // Add errors to model state to display them in the view
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                await _signInManager.RefreshSignInAsync(user);
+                TempData["StatusMessage"] = "Your profile has been updated";
+                return RedirectToAction(nameof(ManageProfile));
             }
 
-            // Re-populate email as it's not posted from the form
-            model.Email = user.Email;
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            model.Email = user.Email; // Re-populate email before returning view
             return View(model);
         }
 
