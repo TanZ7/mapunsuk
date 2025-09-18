@@ -1,0 +1,36 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "เข้าสู่ระบบ";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="login-title">เข้าสู่ระบบ</h2>
+        <form asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="อีเมล" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" placeholder="รหัสผ่าน" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group checkbox">
+                <label asp-for="RememberMe" class="form-label">
+                    <input class="form-check-input" asp-for="RememberMe" />
+                    @Html.DisplayNameFor(m => m.RememberMe)
+                </label>
+            </div>
+            <button type="submit" class="login-button">เข้าสู่ระบบ</button>
+        </form>
+        <div class="register-link">
+            <p>ยังไม่มีบัญชี? <a asp-action="Register">สมัครสมาชิก</a></p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

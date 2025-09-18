@@ -1,0 +1,74 @@
+@model mapunsuk.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "สมัครสมาชิก";
+}
+
+<div class="form-container">
+    <div class="form-card">
+        <h1 class="form-title">สมัครสมาชิกเป็นจิตอาสา</h1>
+        <form asp-controller="Account" asp-action="Register" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="ชื่อ" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" placeholder="นามสกุล" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Gender"></label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" asp-for="Gender" value="ชาย" /> ชาย
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" asp-for="Gender" value="หญิง" /> หญิง
+                    </label>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="อีเมล" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="รหัสผ่าน" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="ยืนยันรหัสผ่าน" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="เบอร์โทรติดต่อ" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <button id="registerSubmit" type="submit" class="form-submit-btn">สมัครสมาชิก</button>
+        </form>
+        <div class="form-link">
+            <p>
+                เป็นสมาชิกอยู่แล้ว? <a asp-controller="Account" asp-action="Login">เข้าสู่ระบบ</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
