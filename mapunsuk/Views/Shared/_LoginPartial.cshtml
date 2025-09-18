@@ -6,11 +6,28 @@
 <div class="nav-buttons">
     @if (SignInManager.IsSignedIn(User))
     {
-        <a class="nav-btn btn-add-activity" asp-controller="Post" asp-action="Manage">จัดการกิจกรรม</a>
-        <a class="nav-user-greeting" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">สวัสดี @User.Identity?.Name!</a>
-        <form class="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-btn btn-login-custom">ออกจากระบบ</button>
-        </form>
+        <a class="nav-btn btn-add-activity" asp-controller="Post" asp-action="Manage">เพิ่มกิจกรรมจิตอาสา</a>
+        <div class="nav-item notification-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </div>
+        <div class="user-dropdown">
+            <button id="userDropdownToggle" class="user-dropdown-toggle">
+                <div class="user-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div id="userDropdownMenu" class="dropdown-menu">
+                <div class="dropdown-item user-info">ชื่อผู้ใช้: @UserManager.GetUserName(User)</div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">แก้ไขข้อมูลส่วนตัว</a>
+                <a class="dropdown-item" asp-controller="Post" asp-action="Joined">จิตอาสาที่เข้าร่วม</a>
+                <a class="dropdown-item" asp-controller="Post" asp-action="History">ประวัติจิตอาสา</a>
+                <div class="dropdown-divider"></div>
+                <form class="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                    <button type="submit" class="dropdown-item logout-button">ออกจากระบบ</button>
+                </form>
+            </div>
+        </div>
     }
     else
     {

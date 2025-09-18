@@ -622,3 +622,105 @@ a:hover {
 .btn-edit { background-color: #4472C4; } /* Blue */
 .btn-delete { background-color: #ED7D31; } /* Orange/Red */
 .btn-close-post { background-color: #70AD47; } /* Green */
+
+/* Notification Icon */
+.notification-icon {
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: white;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user-avatar svg {
+    stroke: #5B9BD5;
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    min-width: 220px;
+    z-index: 1000;
+    list-style: none;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.user-info {
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.logout-button {
+    color: #dc3545; /* Red color for logout */
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: #dc3545;
+}
+
+.dropdown-divider {
+    height: 1px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    background-color: #e9ecef;
+}
