@@ -698,6 +698,7 @@ a:hover {
     background-color: transparent;
     border: 0;
     text-decoration: none;
+    box-sizing: border-box; /* Add this line */
 }
 
 .dropdown-item:hover {
