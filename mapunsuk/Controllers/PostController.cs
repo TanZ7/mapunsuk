@@ -1,10 +1,13 @@
 ﻿using mapunsuk.Data;
 using mapunsuk.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +18,13 @@ namespace mapunsuk.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PostController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public PostController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Post/Manage
@@ -53,13 +58,32 @@ namespace mapunsuk.Controllers
         // POST: Post/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Description,Location,Category,StartDate,EndDate,MaxParticipants,ExpirationDate")] Post post)
+        public async Task<IActionResult> Create(Post post, IFormFile coverImageFile)
         {
             ModelState.Remove("Owner");
             ModelState.Remove("OwnerId");
+            ModelState.Remove("CoverImage");
 
             if (ModelState.IsValid)
             {
+                if (coverImageFile != null && coverImageFile.Length > 0)
+                {
+                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images/covers");
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(coverImageFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await coverImageFile.CopyToAsync(fileStream);
+                    }
+                    post.CoverImage = "/images/covers/" + uniqueFileName;
+                }
+
                 post.OwnerId = _userManager.GetUserId(User);
                 _context.Add(post);
                 await _context.SaveChangesAsync();
